@@ -1,0 +1,101 @@
+{
+  "metadata": {
+    "edge_server_count": 10,
+    "cloud_server_count": 1,
+    "edge_cloud_bandwidth_mbps": 100.0,
+    "task_size_mb": 0.5,
+    "task_complexity_gigacycles": 1.0
+  },
+  "edge_servers": [
+    {
+      "attributes": {
+        "id": 1,
+        "model_name": "edge_1",
+        "cpu": 2000.0
+      },
+      "relationships": {}
+    },
+    {
+      "attributes": {
+        "id": 2,
+        "model_name": "edge_2",
+        "cpu": 2000.0
+      },
+      "relationships": {}
+    },
+    {
+      "attributes": {
+        "id": 3,
+        "model_name": "edge_3",
+        "cpu": 2000.0
+      },
+      "relationships": {}
+    },
+    {
+      "attributes": {
+        "id": 4,
+        "model_name": "edge_4",
+        "cpu": 2000.0
+      },
+      "relationships": {}
+    },
+    {
+      "attributes": {
+        "id": 5,
+        "model_name": "edge_5",
+        "cpu": 2000.0
+      },
+      "relationships": {}
+    },
+    {
+      "attributes": {
+        "id": 6,
+        "model_name": "edge_6",
+        "cpu": 2000.0
+      },
+      "relationships": {}
+    },
+    {
+      "attributes": {
+        "id": 7,
+        "model_name": "edge_7",
+        "cpu": 2000.0
+      },
+      "relationships": {}
+    },
+    {
+      "attributes": {
+        "id": 8,
+        "model_name": "edge_8",
+        "cpu": 2000.0
+      },
+      "relationships": {}
+    },
+    {
+      "attributes": {
+        "id": 9,
+        "model_name": "edge_9",
+        "cpu": 2000.0
+      },
+      "relationships": {}
+    },
+    {
+      "attributes": {
+        "id": 10,
+        "model_name": "edge_10",
+        "cpu": 2000.0
+      },
+      "relationships": {}
+    }
+  ],
+  "cloud_servers": [
+    {
+      "attributes": {
+        "id": 10001,
+        "model_name": "cloud_1",
+        "cpu": 25000.0
+      },
+      "relationships": {}
+    }
+  ]
+}
