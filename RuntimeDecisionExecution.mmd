@@ -1,0 +1,11 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'primaryBorderColor': '#333333'}}}%%
+graph LR
+    classDef state fill:#eef7ee,stroke:#3a5a40,stroke-width:2px;
+    classDef network fill:#e8f4f8,stroke:#2b7a78,stroke-width:2px;
+    classDef logic fill:#fcf4e4,stroke:#d4a373,stroke-width:2px;
+    classDef action fill:#ffe6e6,stroke:#cc0000,stroke-width:2px;
+
+    State[5D State Vector]:::state --> Actor[Actor Network]:::network
+    Actor -->|Continuous scalar 0 to 1| Thresh{Threshold > 0.5?}:::logic
+    Thresh -->|Yes| Cloud[Offload to Cloud Node]:::action
+    Thresh -->|No| Edge[Execute at Edge Node]:::action

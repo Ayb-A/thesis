@@ -1,0 +1,13 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'primaryBorderColor': '#333333'}, 'flowchart': {'padding': 0}}}%%
+flowchart LR
+    classDef trigger fill:#ffe6e6,stroke:#cc0000,stroke-width:2px;
+    classDef controller fill:#e8f4f8,stroke:#2b7a78,stroke-width:2px;
+    classDef buffer fill:#fcf4e4,stroke:#d4a373,stroke-width:2px;
+    classDef outcome fill:#eef7ee,stroke:#3a5a40,stroke-width:2px;
+
+    Spike[High Workload<br>Spike]:::trigger --> SLA[Queue Length<br>Threatens SLA]:::trigger
+    SLA --> DWC[DWC Shifts Weights:<br>w_lat ↑, w_eng ↓]:::controller
+    DWC --> Detect[MOPER Detects<br>Weight Mismatch]:::buffer
+    Detect --> Apply[Apply Mismatch<br>Multiplier m_w]:::buffer
+    Apply --> Inflate[Inflate Priority of<br>Older Transitions]:::outcome
+    Inflate --> Prevent[Prevent Catastrophic<br>Forgetting]:::outcome

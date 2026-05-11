@@ -1,0 +1,10 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'primaryBorderColor': '#333333'}, 'flowchart': {'padding': 0}}}%%
+flowchart LR
+    classDef memory fill:#fcf4e4,stroke:#d4a373,stroke-width:2px;
+    classDef compute fill:#e8f4f8,stroke:#2b7a78,stroke-width:2px;
+    classDef update fill:#eef7ee,stroke:#3a5a40,stroke-width:2px;
+
+    MOPER[(MOPER Buffer)]:::memory -->|Sample Batch<br>via p_adj| Critic[Dual-Head<br>Critic]:::compute
+    Critic -->|Compute Latency &<br>Energy TD-errors| Loss[Aggregate<br>Weighted Loss]:::compute
+    Loss --> Actor[Update Actor<br>Policy Gradient]:::update
+    Actor --> Target[Soft Update<br>Target Networks]:::update

@@ -1,0 +1,57 @@
+EMA : Morales-Brotons, D., Vogels, T., & Hendrikx, H. (2024). Exponential moving average of weights in deep learning: Dynamics and benefits. arXiv preprint arXiv:2411.18704.
+SAC foundational papers identified (Haarnoja et al. 2018 arXiv:1801.01290 + Christodoulou 2019 arXiv:1910.07207); Cell 11 full SAC implementation written — discrete action space, schema-compatible
+D3QN:
+
+
+
+
+
+
+1. The Environment Physics (EdgeSimPy)
+Edge Servers:10 servers. CPU capacity is 5,000 MIPS each.
+Cloud Server: 1 server. CPU capacity is 25,000 MIPS.
+Network Bandwidth:100 Mbps between edge and cloud.
+Task Size: 5 Megabytes per task.
+Task Complexity: 1 Gigacycle per task.
+
+2. The Agent Brain (PyTorch Hyperparameters)
+
+Algorithm: Actor-Critic.
+Learning Rate: 0.001 (for both Actor and Critic).
+Discount Factor (gamma): 0.99.
+Batch Size: 64.
+Memory Buffer Capacity: 50,000 transitions.
+Reproducibility: Run every experiment 5 times using seeds `[10, 20, 30, 40, 50]`.
+
+3. The Models to Code (The Baselines)
+
+1. Baseline 1: Random Scheduler: baseline without learning.
+2. Baseline 2: D3QN: dual dueling deep Q-network.
+3. Baseline 3:SAC: Soft Actor-Critic for continuous control.
+4. Your Artefact: Dynamic Weights + MOPER
+
+### 4. The Three Exact Scenarios to Run
+
+You will run all four models through these three exact timelines.
+
+**Scenario 1: Constant Workload (The Control)**
+
+* **Total Duration:** 2,000 timesteps.
+* **Workload:** 50 tasks arrive every single timestep.
+* **Objectives:** Weights are permanently locked at 0.5 for Latency and 0.5 for Energy.
+* *Goal:* Prove the code runs without crashing.
+
+**Scenario 2: Single Traffic Spike (The Adaptation Test)**
+
+* **Total Duration:** 2,000 timesteps.
+* **Steps 0 to 500 (Normal):** 50 tasks arrive per step. Weights are set to 0.3 Latency / 0.7 Energy.
+* **Steps 501 to 1,000 (The Spike):** 150 tasks arrive per step. Weights dynamically shift to 0.8 Latency / 0.2 Energy.
+* **Steps 1,001 to 2,000 (The Recovery):** Workload drops back to 50 tasks per step. Weights shift back to 0.3 Latency / 0.7 Energy.
+* *Goal:* Prove dynamic weighting prevents latency bottlenecks during the 500-step spike.
+
+**Scenario 3: Repeated Traffic Spikes (The Ultimate Stress Test)**
+
+* **Total Duration:** 5,000 timesteps.
+* **The Pattern:** 500 steps Normal $\rightarrow$ 500 steps Spike $\rightarrow$ 500 steps Normal $\rightarrow$ 500 steps Spike (repeating until step 5,000).
+* **The Math:** Normal = 50 tasks (0.3/0.7 weights). Spike = 150 tasks (0.8/0.2 weights).
+* *Goal:* Track the TD-error step-by-step. Prove that standard state-of-the-art algorithms (D3QN and SAC) suffer from policy collapse or slow recovery because constant shifting poisons their standard memory, while your MOPER artefact stays perfectly stable.
